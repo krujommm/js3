@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOY SUD Cup#3</title>
+    <link rel="icon" href="https://img2.pic.in.th/pic/fav3ce90a2f13e58198.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(135deg, #fff8f8 0%, #fff1f9 100%);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #FF9966 0%, #FF5E62 50%, #B721FF 100%);
+        }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 1rem;
+        }
+        
+        .input-field {
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            transition: all 0.3s;
+        }
+        
+        .input-field:focus {
+            border-color: #FF5E62;
+            box-shadow: 0 0 0 3px rgba(255, 94, 98, 0.2);
+            outline: none;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #FF9966 0%, #FF5E62 100%);
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #FF8966 0%, #FF4E62 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 94, 98, 0.3);
+        }
+        
+        .logo-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+        
+        .form-label {
+            color: #6B46C1;
+            font-weight: 500;
+        }
+        
+        .form-section {
+            border-left: 4px solid #FF5E62;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            margin-top: 1rem;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #FF5E62;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .error-message {
+            display: none;
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            margin-top: 1rem;
+            animation: fadeIn 0.5s;
+        }
+        
+        .radio-container {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .radio-container:hover {
+            background-color: rgba(255, 94, 98, 0.1);
+        }
+        
+        .radio-container input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #FF5E62;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            display: grid;
+            place-content: center;
+            transition: all 0.2s;
+        }
+        
+        .radio-container input[type="radio"]::before {
+            content: "";
+            width: 0.65rem;
+            height: 0.65rem;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1rem 1rem #FF5E62;
+        }
+        
+        .radio-container input[type="radio"]:checked::before {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8 px-4">
+    <div class="max-w-3xl mx-auto">
+        <!-- Logo Header -->
+        <div class="flex justify-center mb-8">
+            <img src="https://img2.pic.in.th/pic/js2025-png.png" alt="JOY SUD Badminton Club Logo" class="h-32 logo-animation">
+        </div>
+        
+        <!-- Title -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold gradient-bg text-transparent bg-clip-text">JOY SUD Cup#3</h1>
+            <p class="text-gray-600 mt-2">แบบฟอร์มสมัครแข่งขันแบดมินตันประเภทคู่</p>
+        </div>
+        
+        <!-- Registration Form -->
+        <div class="form-container p-6 md:p-8">
+            <form id="registrationForm" class="space-y-6">
+                <div class="form-section">
+                    <h2 class="text-xl font-semibold mb-4 text-purple-700">ข้อมูลส่วนตัว</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="prefix" class="form-label block mb-2">คำนำหน้า *</label>
+                            <select id="prefix" name="prefix" class="input-field w-full" required>
+                                <option value="" disabled selected>เลือกคำนำหน้า</option>
+                                <option value="นาย">นาย</option>
+                                <option value="นาง">นาง</option>
+                                <option value="นางสาว">นางสาว</option>
+                                <option value="เด็กชาย">เด็กชาย</option>
+                                <option value="เด็กหญิง">เด็กหญิง</option>
+                                <option value="อื่นๆ">อื่นๆ</option>
+                            </select>
+                        </div>
+                        
+                        <div id="otherPrefixContainer" class="hidden">
+                            <label for="otherPrefix" class="form-label block mb-2">ระบุคำนำหน้าอื่นๆ *</label>
+                            <input type="text" id="otherPrefix" name="otherPrefix" class="input-field w-full">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <label for="firstName" class="form-label block mb-2">ชื่อ *</label>
+                            <input type="text" id="firstName" name="firstName" class="input-field w-full" required>
+                        </div>
+                        
+                        <div>
+                            <label for="lastName" class="form-label block mb-2">นามสกุล *</label>
+                            <input type="text" id="lastName" name="lastName" class="input-field w-full" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <label for="nickname" class="form-label block mb-2">ชื่อเล่น *</label>
+                            <input type="text" id="nickname" name="nickname" class="input-field w-full" required>
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="form-label block mb-2">เบอร์โทรศัพท์ *</label>
+                            <input type="tel" id="phone" name="phone" class="input-field w-full" pattern="[0-9]{9,10}" required>
+                            <p class="text-xs text-gray-500 mt-1">กรุณากรอกเฉพาะตัวเลข 9-10 หลัก</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="text-xl font-semibold mb-4 text-purple-700">ข้อมูลการแข่งขัน</h2>
+                    
+                    <div class="mb-6">
+                        <label class="form-label block mb-3">ระดับมือ *</label>
+                        <div class="space-y-2">
+                            <label class="radio-container">
+                                <input type="radio" name="level" value="จอยสัสๆ หนักสุด" required>
+                                <span>จอยสัสๆ หนักสุด</span>
+                            </label>
+                            <label class="radio-container">
+                                <input type="radio" name="level" value="จอยสุด ไม่หนักสัสๆ">
+                                <span>จอยสุด ไม่หนักสัสๆ</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label block mb-3">ท่านสนใจเข้าร่วมงานเลี้ยงหลังแข่งขัน ณ โรงแรมสการ์เลท หรือไม่? *</label>
+                        <div class="space-y-2">
+                            <label class="radio-container">
+                                <input type="radio" name="joinParty" value="สนใจ" required>
+                                <span>สนใจ</span>
+                            </label>
+                            <label class="radio-container">
+                                <input type="radio" name="joinParty" value="ไม่สนใจ">
+                                <span>ไม่สนใจ</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                    <p class="text-orange-700 text-sm">
+                        <strong>หมายเหตุ:</strong> ค่าสมัครแข่งขันไม่เกิน 500 บาทต่อคน และค่าบัตรเข้าร่วมงานเลี้ยง ไม่เกิน 400 บาทต่อใบ 
+                        ราคาโดยสรุปจะแจ้งให้ทราบอีกครั้งภายหลัง พร้อมให้ยืนยันและโอนชำระเงิน
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="submit-btn text-white font-medium py-3 px-8 rounded-full">
+                        ส่งใบสมัคร
+                    </button>
+                </div>
+            </form>
+            
+            <div id="loadingIndicator" class="loading">
+                <div class="loading-spinner"></div>
+                <p class="mt-2 text-gray-600">กำลังส่งข้อมูล...</p>
+            </div>
+            
+            <div id="successMessage" class="success-message">
+                <p>ส่งใบสมัครเรียบร้อยแล้ว! ขอบคุณที่สมัครเข้าร่วมการแข่งขัน JOY SUD Cup#3</p>
+            </div>
+            
+            <div id="errorMessage" class="error-message">
+                <p>เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง</p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-gray-500 text-sm">
+            <p>Joy Sud badminton club | since 2024</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const prefix = document.getElementById('prefix');
+            const otherPrefixContainer = document.getElementById('otherPrefixContainer');
+            const otherPrefix = document.getElementById('otherPrefix');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Show "Other" prefix field if "Other" is selected
+            prefix.addEventListener('change', function() {
+                if (this.value === 'อื่นๆ') {
+                    otherPrefixContainer.classList.remove('hidden');
+                    otherPrefix.required = true;
+                } else {
+                    otherPrefixContainer.classList.add('hidden');
+                    otherPrefix.required = false;
+                }
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading indicator
+                loadingIndicator.style.display = 'block';
+                
+                // Create an object to hold the form data
+                const formDataObj = {};
+                
+                // Get form data
+                const formData = new FormData(form);
+                
+                // Convert FormData to a regular object
+                for (let [key, value] of formData.entries()) {
+                    formDataObj[key] = value;
+                }
+                
+                // If "Other" prefix is selected, use the custom value
+                if (prefix.value === 'อื่นๆ') {
+                    formDataObj.prefix = otherPrefix.value;
+                }
+                
+                // Make sure joinParty is included
+                const joinPartyValue = document.querySelector('input[name="joinParty"]:checked')?.value;
+                if (joinPartyValue) {
+                    formDataObj.joinParty = joinPartyValue;
+                }
+                
+                // Convert the object back to URLSearchParams for the POST request
+                const urlEncodedData = new URLSearchParams();
+                for (const key in formDataObj) {
+                    urlEncodedData.append(key, formDataObj[key]);
+                }
+                
+                // Send data to Google Apps Script
+                fetch('https://script.google.com/macros/s/AKfycbzNPK5kEoKDYda0VyVjwsiUmvVbVym_vY2a5e0p1Jqc9fOJBIx7JPciJou6XkMkJJ9vnQ/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: urlEncodedData.toString()
+                })
+                .then(response => {
+                    loadingIndicator.style.display = 'none';
+                    
+                    if (response.ok) {
+                        // Show success message
+                        successMessage.style.display = 'block';
+                        form.reset();
+                        
+                        // Scroll to success message
+                        successMessage.scrollIntoView({ behavior: 'smooth' });
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        // Show error message
+                        errorMessage.style.display = 'block';
+                        
+                        // Hide error message after 5 seconds
+                        setTimeout(() => {
+                            errorMessage.style.display = 'none';
+                        }, 5000);
+                    }
+                })
+                .catch(error => {
+                    loadingIndicator.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                    
+                    // Hide error message after 5 seconds
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 5000);
+                    
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'943b127c871d893a',t:'MTc0NzkwMzg5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
