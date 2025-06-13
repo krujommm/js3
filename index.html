@@ -1,206 +1,846 @@
-
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOY SUD Cup#3</title>
+    <title>JOY SUD CUP #3 - Badminton Tournament</title>
     <link rel="icon" href="https://img2.pic.in.th/pic/fav3ce90a2f13e58198.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Prompt', sans-serif;
-            background: linear-gradient(135deg, #fff8f8 0%, #fff1f9 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
         }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #FF9966 0%, #FF5E62 50%, #B721FF 100%);
-        }
-        
+
         .gradient-text {
-            background: linear-gradient(135deg, #FF9966 0%, #FF5E62 50%, #B721FF 100%);
+            background: linear-gradient(to right, #ff9a3c, #ff3d7f, #ff9a3c);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-        }
-        
-        .content-container {
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 1rem;
+            display: inline-block;
         }
         
         .logo-animation {
             animation: float 6s ease-in-out infinite;
+        }    
+
+        .shuttle {
+            animation: fly 3s ease-in-out infinite;
         }
-        
-        @keyframes float {
+
+        @keyframes fly {
             0% {
-                transform: translateY(0px) rotate(0deg);
+                transform: translateY(0) rotate(0deg);
             }
             50% {
-                transform: translateY(-15px) rotate(2deg);
+                transform: translateY(-20px) rotate(180deg);
             }
             100% {
-                transform: translateY(0px) rotate(0deg);
+                transform: translateY(0) rotate(360deg);
             }
         }
-        
-        .pulse-animation {
+
+        .pulse {
             animation: pulse 2s infinite;
         }
-        
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
-                opacity: 1;
             }
             50% {
                 transform: scale(1.05);
-                opacity: 0.8;
             }
             100% {
                 transform: scale(1);
-                opacity: 1;
             }
         }
-        
-        .badge {
-            background: linear-gradient(135deg, #FF5E62 0%, #B721FF 100%);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            display: inline-block;
-            transform: rotate(-2deg);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
-        
-        .social-icon {
-            transition: all 0.3s;
-        }
-        
-        .social-icon:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.2);
-        }
-        
-        .footer {
-            margin-top: auto;
-            padding: 1.5rem;
-        }
-        
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            opacity: 0;
-            animation: confetti-fall 3s ease-in-out infinite;
-        }
-        
-        @keyframes confetti-fall {
+
+        @keyframes float {
             0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
             }
             100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
+                transform: translateY(0px);
             }
+        }
+
+        .btn-start {
+            background: linear-gradient(to right, #ff9a3c, #ff3d7f);
+            transition: all 0.3s ease;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 61, 127, 0.3);
+        }
+
+        .group-btn {
+            transition: all 0.3s ease;
+        }
+
+        .group-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .dashboard, .group-a, .group-b {
+            display: none;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: -1;
+        }
+
+        .circle-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 5%;
+            background: rgba(255, 154, 60, 0.2);
+            animation: move 8s infinite alternate;
+        }
+
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            bottom: 5%;
+            right: 10%;
+            background: rgba(169, 96, 238, 0.2);
+            animation: move 12s infinite alternate-reverse;
+        }
+
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            right: 20%;
+            background: rgba(255, 61, 127, 0.2);
+            animation: move 10s infinite alternate;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(30px, 30px);
+            }
+        }
+
+        /* Card flip styles */
+        .card {
+            perspective: 1000px;
+            height: 180px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card-front {
+            background: linear-gradient(45deg, #ff9a3c, #ff3d7f);
+            color: white;
+        }
+
+        .card-back {
+            background: linear-gradient(45deg, #a960ee, #ff3d7f);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .tab {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-bottom: 3px solid white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="py-8 px-4">
-    <!-- Confetti Animation -->
-    <div id="confetti-container"></div>
-    
-    <div class="max-w-3xl mx-auto">
-        <!-- Logo Header -->
-        <div class="flex justify-center mb-8">
-            <img src="https://img2.pic.in.th/pic/js2025-png.png" alt="JOY SUD Badminton Club Logo" class="h-32 logo-animation">
+<body class="flex flex-col items-center justify-center p-4 md:p-8">
+    <!-- Background circles -->
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+
+    <!-- Landing Page -->
+    <div id="landing" class="w-full max-w-4xl flex flex-col items-center justify-center min-h-screen">
+                    <div class="flex justify-center">
+            <img src="https://img2.pic.in.th/pic/js2025-png.png" alt="JOY SUD Badminton Club Logo" class="h-40 logo-animation">
         </div>
-        
-        <!-- Title -->
         <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold gradient-text">JOY SUD Cup#3</h1>
-            <p class="text-gray-600 mt-2">การสำรวจผู้สนใจแข่งขันแบดมินตันประเภทคู่</p>
-        </div>
-        
-        <!-- Main Content -->
-        <div class="content-container p-6 md:p-8 text-center">
-            <div class="mb-6">
-                <span class="badge pulse-animation">ปิดระบบสำรวจแล้ว</span>
+            <div class="flex items-center justify-center mb-6">
+                <div class="shuttle mr-4">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 6L7 12H17L12 6Z" fill="white"/>
+                        <path d="M12 6L7 12H17L12 6Z" stroke="white" stroke-width="1.5"/>
+                        <path d="M12 22C12 22 12 16 12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+    
+    <h1 class="text-4xl md:text-6xl font-bold text-white">
+                    <span class="gradient-text pulse">JOY SUD CUP #3</span>
+                </h1>
+                <div class="shuttle ml-4">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 6L7 12H17L12 6Z" fill="white"/>
+                        <path d="M12 6L7 12H17L12 6Z" stroke="white" stroke-width="1.5"/>
+                        <path d="M12 22C12 22 12 16 12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
             </div>
+            <p class="text-white text-xl md:text-2xl mb-8 floating">🏸 ร่วมฉลอง 1st Anniversary JOY SUD Badminton Club 🏸</p>
             
-            <h2 class="text-2xl font-bold text-purple-700 mb-4">ขอบคุณสำหรับความสนใจ</h2>
-            
-            <div class="space-y-4 mb-8">
-                <p class="text-gray-700">
-                    ขณะนี้การสำรวจผู้สนใจเข้าร่วมการแข่งขันแบดมินตัน JOY SUD Cup#3 ได้สิ้นสุดลงแล้ว
-                </p>
-                <p class="text-gray-700">
-                    ทางทีมงานขอขอบคุณทุกท่านที่ให้ความสนใจ และจะประกาศรับสมัครการแข่งขันในเร็ว ๆ นี้
-                </p>
-            </div>
-            
-            <div class="gradient-bg h-px w-full my-6"></div>
-            
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold text-purple-700 mb-3">ติดตามข่าวสารเพิ่มเติมได้ที่</h3>
-                <div class="flex justify-center space-x-6 mt-4">
-                    <!-- Facebook Icon -->
-                    <a href="https://m.facebook.com/joysud.nst" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="#FF5E62">
-                            <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
-                        </svg>
-                    </a>
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-xl text-center w-32">
+                    <span class="text-4xl">🏆</span>
+                    <p class="text-white mt-2">รางวัลใหญ่</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-xl text-center w-32">
+                    <span class="text-4xl">👥</span>
+                    <p class="text-white mt-2">2 กลุ่ม</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-xl text-center w-32">
+                    <span class="text-4xl">📅</span>
+                    <p class="text-white mt-2">6 SEP 2025</p>
                 </div>
             </div>
             
-            <div class="mt-8">
-                <a href="#" class="inline-block gradient-bg text-white font-medium py-3 px-8 rounded-full transition-all hover:shadow-lg hover:scale-105">
-                    กลับสู่หน้าหลัก
-                </a>
+            <button id="startBtn" class="btn-start text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg">
+                เริ่มใช้งาน
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard w-full max-w-4xl p-8 md:p-12">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">แดชบอร์ด</h2>
+            <p class="text-white text-lg">เลือกกลุ่มเพื่อดูข้อมูลการจัดคู่และแบ่งสายการแข่งขัน</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12">
+            <button id="groupABtn" class="group-btn w-full md:w-64 h-64 bg-gradient-to-br from-orange-400 to-pink-500 rounded-2xl flex flex-col items-center justify-center shadow-xl hover:shadow-2xl">
+                <span class="text-5xl mb-4">🏸</span>
+                <h3 class="text-3xl font-bold text-white">GROUP A</h3>
+                <p class="text-white mt-2">ดูข้อมูลกลุ่ม A</p>
+            </button>
+            
+            <button id="groupBBtn" class="group-btn w-full md:w-64 h-64 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex flex-col items-center justify-center shadow-xl hover:shadow-2xl">
+                <span class="text-5xl mb-4">🏸</span>
+                <h3 class="text-3xl font-bold text-white">GROUP B</h3>
+                <p class="text-white mt-2">ดูข้อมูลกลุ่ม B</p>
+            </button>
+        </div>
+        
+        <div class="mt-12 text-center">
+            <button id="backToLandingBtn" class="bg-white/20 hover:bg-white/30 text-white font-medium py-2 px-6 rounded-full transition-all">
+                กลับสู่หน้าหลัก
+            </button>
+        </div>
+    </div>
+
+    <!-- Group A Page -->
+    <div id="groupA" class="group-a w-full max-w-4xl p-6 md:p-8">
+        <div class="text-center mb-8">
+            <h2 class="text-4xl font-bold text-white mb-2">กลุ่ม A</h2>
+            <p class="text-white text-lg mb-6">การแบ่งสาย 9 คู่ แบ่งเป็น 3 สาย</p>
+            
+            <div class="flex justify-center mb-6">
+                <div class="flex space-x-2 bg-white/10 rounded-full p-1">
+                    <div class="tab active px-4 py-2 rounded-full text-white" data-tab="a1">สายที่ 1</div>
+                    <div class="tab px-4 py-2 rounded-full text-white" data-tab="a2">สายที่ 2</div>
+                    <div class="tab px-4 py-2 rounded-full text-white" data-tab="a3">สายที่ 3</div>
+                </div>
+            </div>
+            
+            <p class="text-white text-sm mb-4">👆 กดที่การ์ดเพื่อดูข้อมูลเพิ่มเติม</p>
+        </div>
+        
+        <!-- Group A Line 1 -->
+        <div id="a1" class="tab-content active">
+            <h3 class="text-2xl font-bold text-white mb-4 text-center">กลุ่ม A สายที่ 1</h3>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p>ปริม (นายณัฐพล คนทามาศ)</p>
+                            <p>หมวดซัน (นายณัฐชนน ลิ่มประจวบพงษ์)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p>อาร์ม (นายอริญชย์ เวศกิจกุล)</p>
+                            <p>โอม (นายธยาน์ เวศกิจกุล)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p>มังกร (นายสัณห์พิชญ์ เจียรบุตร)</p>
+                            <p>ช็อปเปอร์ (นายชนะศักดิ์ รักขนาม)</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <!-- Footer -->
-        <footer class="footer text-center text-gray-500 text-sm">
-            <p>Joy Sud badminton club | since 2024</p>
-        </footer>
-    </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create confetti elements
-            const confettiContainer = document.getElementById('confetti-container');
-            const colors = ['#FF9966', '#FF5E62', '#B721FF', '#FFC0CB', '#FFFFFF'];
+        <!-- Group A Line 2 -->
+        <div id="a2" class="tab-content">
+            <h3 class="text-2xl font-bold text-white mb-4 text-center">กลุ่ม A สายที่ 2</h3>
             
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.width = Math.random() * 10 + 5 + 'px';
-                confetti.style.height = Math.random() * 10 + 5 + 'px';
-                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-                confetti.style.animationDelay = Math.random() * 5 + 's';
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p>เปา (นายศุทกานต์ สุภวิบูลาสน์)</p>
+                            <p>ซัน (นายอรุณวงศ์ วัฒนภู่บริบูรณ์)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p>บอย (นายนัทธพงศ์ หลีหมาด)</p>
+                            <p>เป้ (นางสาวเรือนใจ นวลมังสอบ)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p>เพชร (นายอยุทธ์ ระห่างภัย)</p>
+                            <p>พี่แจน (นางสาวศศิณัฏฐ์ ทองเนื้อสุข)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Group A Line 3 -->
+        <div id="a3" class="tab-content">
+            <h3 class="text-2xl font-bold text-white mb-4 text-center">กลุ่ม A สายที่ 3</h3>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p>พี่หนู (นางสาวสุพรรษา เนตรไสว)</p>
+                            <p>โก้ (นายกฤษฎากร รีวรรณ)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p>อิฐ (นายธัชธรรม มูสิกะ)</p>
+                            <p>จอม (นายวัชรพงศ์ รอบคอบ)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p>ตอง (นายนันทพล แก้วกาญจน์)</p>
+                            <p>แม็กซ์ (นายณัฐชนน กอเจริญรัตน์)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center">
+            <button id="backToDashboardFromA" class="bg-white/20 hover:bg-white/30 text-white font-medium py-2 px-6 rounded-full transition-all">
+                กลับสู่แดชบอร์ด
+            </button>
+        </div>
+    </div>
+
+    <!-- Group B Page -->
+    <div id="groupB" class="group-b w-full max-w-4xl p-6 md:p-8">
+        <div class="text-center mb-8">
+            <h2 class="text-4xl font-bold text-white mb-2">กลุ่ม B</h2>
+            <p class="text-white text-lg mb-6">การแบ่งสาย 12 คู่ แบ่งเป็น 3 สาย</p>
+            
+            <div class="flex justify-center mb-6">
+                <div class="flex space-x-2 bg-white/10 rounded-full p-1">
+                    <div class="tab active px-4 py-2 rounded-full text-white" data-tab="b1">สายที่ 1</div>
+                    <div class="tab px-4 py-2 rounded-full text-white" data-tab="b2">สายที่ 2</div>
+                    <div class="tab px-4 py-2 rounded-full text-white" data-tab="b3">สายที่ 3</div>
+                </div>
+            </div>
+            
+            <p class="text-white text-sm mb-4">👆 กดที่การ์ดเพื่อดูข้อมูลเพิ่มเติม</p>
+        </div>
+        
+        <!-- Group B Line 1 -->
+        <div id="b1" class="tab-content active">
+            <h3 class="text-2xl font-bold text-white mb-4 text-center">กลุ่ม B สายที่ 1</h3>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p>ลี่ (นายไกรวิชญ์ ศุภกิจติวงศ์)</p>
+                            <p>นนท์ (นายพงศธร กฤตสัมพันธ์)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p>โอ (นายอนุภัทร บุญสถิตย์)</p>
+                            <p>จิ๊บ (นางสาวจิตราภา ตั้งเกษมสุข)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p>พี (นายพีรพล พงษ์กระจ่าง)</p>
+                            <p>สนุกเกอร์ (นายกฤตตฤณ เข็มแดง)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 4</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 4</h4>
+                            <p>บิวตี้ (นางสาวศิริลักษณ์ ดำแจ่ม)</p>
+                            <p>ซูกัส (นายสรธร สุวรรณสะอาด)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Group B Line 2 -->
+        <div id="b2" class="tab-content">
+            <h3 class="text-2xl font-bold text-white mb-4 text-center">กลุ่ม B สายที่ 2</h3>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p>ปอ (นายธนิทธิ อัศวโอภากุล)</p>
+                            <p>ญาญ่า (นายนิติธร จันทร์คง)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p>ตั้ม (นายอภิศันย์ ศิริพันธ์)</p>
+                            <p>แป้ง (นางศิริลักษณ์ สุภวิบูลาสน์)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p>ปอ (นางสาวธัญญภรณ์ วิมนต์ทรง)</p>
+                            <p>ต้น (นายสุเมตร์ จิรขจรกุล)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 4</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 4</h4>
+                            <p>อิ๋น (นางสาวพศิกา หงสุชน)</p>
+                            <p>ปูน (นางสุมณฑา มูสิกะ)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Group B Line 3 -->
+        <div id="b3" class="tab-content">
+            <h3 class="text-2xl font-bold text-white mb-4 text-center">กลุ่ม B สายที่ 3</h3>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 1</h4>
+                            <p>อ้น (นายสุพจน์ รุณหิวา)</p>
+                            <p>อั่งเปา (นางสาวตรีทิพย์ แซ่หลี)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 2</h4>
+                            <p>อั้ม (นายกวีวุฒฑ์ โสภาผล)</p>
+                            <p>หมูหวาน (นางสาวธันยพร สิกขฤทธิ์)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 3</h4>
+                            <p>น้ำ (นางสาวกนกวรรณ เข็มแดง)</p>
+                            <p>เต้ย (นายโรจนัจฉริย์ ทรัพย์แก้ว)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 4</h4>
+                            <p class="text-sm mt-2">👆 กดเพื่อดูข้อมูลเพิ่มเติม</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="text-center">
+                            <h4 class="text-xl font-bold">คู่ที่ 4</h4>
+                            <p>ปลา (นางสาวรัตนา มโนยุทธ)</p>
+                            <p>ยังคิว (นายธิติ​วุฒิ​ ชูร​ะ​มาน​)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center">
+            <button id="backToDashboardFromB" class="bg-white/20 hover:bg-white/30 text-white font-medium py-2 px-6 rounded-full transition-all">
+                กลับสู่แดชบอร์ด
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Page navigation
+        const startBtn = document.getElementById('startBtn');
+        const backToLandingBtn = document.getElementById('backToLandingBtn');
+        const groupABtn = document.getElementById('groupABtn');
+        const groupBBtn = document.getElementById('groupBBtn');
+        const backToDashboardFromA = document.getElementById('backToDashboardFromA');
+        const backToDashboardFromB = document.getElementById('backToDashboardFromB');
+        
+        const landing = document.getElementById('landing');
+        const dashboard = document.getElementById('dashboard');
+        const groupA = document.getElementById('groupA');
+        const groupB = document.getElementById('groupB');
+        
+        // Show landing page by default
+        landing.style.display = 'flex';
+        dashboard.style.display = 'none';
+        groupA.style.display = 'none';
+        groupB.style.display = 'none';
+        
+        // Navigation functions
+        startBtn.addEventListener('click', () => {
+            landing.style.display = 'none';
+            dashboard.style.display = 'block';
+            dashboard.style.animation = 'fadeIn 0.5s ease-in-out';
+        });
+        
+        backToLandingBtn.addEventListener('click', () => {
+            dashboard.style.display = 'none';
+            landing.style.display = 'flex';
+        });
+        
+        groupABtn.addEventListener('click', () => {
+            dashboard.style.display = 'none';
+            groupA.style.display = 'block';
+            groupA.style.animation = 'fadeIn 0.5s ease-in-out';
+        });
+        
+        groupBBtn.addEventListener('click', () => {
+            dashboard.style.display = 'none';
+            groupB.style.display = 'block';
+            groupB.style.animation = 'fadeIn 0.5s ease-in-out';
+        });
+        
+        backToDashboardFromA.addEventListener('click', () => {
+            groupA.style.display = 'none';
+            dashboard.style.display = 'block';
+        });
+        
+        backToDashboardFromB.addEventListener('click', () => {
+            groupB.style.display = 'none';
+            dashboard.style.display = 'block';
+        });
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Get the parent container to find related tabs
+                const tabContainer = tab.parentElement;
+                const groupContainer = tabContainer.closest('.group-a, .group-b');
+                const tabId = tab.getAttribute('data-tab');
                 
-                // Randomly choose between circle and rectangle
-                if (Math.random() > 0.5) {
-                    confetti.style.borderRadius = '50%';
-                }
+                // Remove active class from all tabs in this container
+                tabContainer.querySelectorAll('.tab').forEach(t => {
+                    t.classList.remove('active');
+                });
                 
-                confettiContainer.appendChild(confetti);
-            }
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all tab contents in this group
+                groupContainer.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show the selected tab content
+                groupContainer.querySelector(`#${tabId}`).classList.add('active');
+            });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'947ef427949bd338',t:'MTc0ODYxNTY4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94eef2c977e274d4',t:'MTc0OTc5MDAzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
